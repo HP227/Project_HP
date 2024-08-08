@@ -39,8 +39,7 @@ SELECT DISTINCT MONTH([Invoice_Date]) AS [Month],
 	SUM(revenue) OVER (PARTITION BY MONTH([Invoice_Date])) AS Month_Revenue 
 FROM dbo.Adidas_sale_2020
 ORDER BY [Month]
-
-
+	
 --Classify retailer by total revenue
 WITH revenue_retailer AS (
 SELECT DISTINCT Retailer,
@@ -55,7 +54,7 @@ SELECT Retailer, Total_Revenue_Retailer,
 	END AS classify_retailer
 FROM revenue_retailer
 
--- Evaluate the units sold of Footwear’s product, each month in 2021 increases or decreases compared to the same period last year. (That means how many % growth in January 2021 compared to January 2020)
+-- Evaluate the units sold of Footwearâ€™s product, each month in 2021 increases or decreases compared to the same period last year. (That means how many % growth in January 2021 compared to January 2020)
 WITH Month_table AS (
 SELECT DISTINCT YEAR(Invoice_Date) AS [Year] , MONTH(Invoice_Date) AS [Month],
 		SUM(Units_Sold) OVER (PARTITION BY YEAR(Invoice_Date), MONTH(Invoice_Date)) AS Total_units
